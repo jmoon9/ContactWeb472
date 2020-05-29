@@ -54,6 +54,7 @@ namespace ContactWeb472.Models
         [StringLength(ContactWebConstants.MAX_ZIP_LENGTH, MinimumLength = ContactWebConstants.MIN_ZIP_LENGTH)]
         public string Zip { get; set; }
 
+        public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
         [Display(Name = "Full Name")]

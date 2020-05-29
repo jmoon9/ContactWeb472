@@ -54,7 +54,7 @@
             new State() { Name = "Louisiana", Abbreviation = "LA"},
             new State() { Name = "Maine", Abbreviation = "ME"},
             new State() { Name = "Maryland", Abbreviation = "MD"},
-            new State() { Name = "Massachusetts", Abbreviation = "MS"},
+            new State() { Name = "Massachusetts", Abbreviation = "MA"},
             new State() { Name = "Michigan", Abbreviation = "MI"},
             new State() { Name = "Minnesota", Abbreviation = "MN"},
             new State() { Name = "Mississippi", Abbreviation = "MS"},

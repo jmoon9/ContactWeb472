@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ContactWeb472.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ContactWeb472
 {
@@ -18,6 +19,9 @@ namespace ContactWeb472
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+
+
+            CreateRolesAndUsers();
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -63,6 +67,32 @@ namespace ContactWeb472
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+        }
+
+        private void CreateRolesAndUsers()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            if (!roleManager.RoleExists("Admin"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                roleManager.Create(role);
+
+                var user = new ApplicationUser();
+                user.UserName = "moon@test2020.com";
+                user.Email = "moon@test2020.com";
+
+                var userPWD = "Gocanes1!";
+                var chkUser = userManager.Create(user, userPWD);
+
+                if (!chkUser.Succeeded) throw new Exception("Couldn't create super admin user");
+
+                userManager.AddToRole(user.Id, "Admin");
+            }
         }
     }
 }

@@ -22,8 +22,14 @@ namespace ContactWeb472
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                "~/Scripts/DataTables/datatables.min.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/DataTables/datatables.min.css",
+                      "~/Content/DataTables/jquery.datatables.min.css",
                       "~/Content/site.css"));
         }
     }

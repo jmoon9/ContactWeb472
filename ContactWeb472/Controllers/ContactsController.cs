@@ -96,10 +96,10 @@ namespace ContactWeb472.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,PhonePrimary,PhoneSecondary,Birthday,StreetAddress1,StreetAddress2,City,StateId,Zip,UserId")] Contact contact)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,PhonePrimary,PhoneSecondary,Birthday,StreetAddress1,StreetAddress2,City,StateId,Zip")] Contact contact)
         {
             _userId = GetCurrentUserId();
-            var existing = db.Contacts.FirstOrDefault(x => x.Id == contact.Id && x.UserId == _userId);
+            var existing = db.Contacts.AsNoTracking().FirstOrDefault(x => x.Id == contact.Id && x.UserId == _userId);
             if (existing == null) return HttpNotFound(); 
 
             contact.UserId = _userId;
